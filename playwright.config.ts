@@ -1,5 +1,6 @@
 import { defineConfig } from "@playwright/test";
 import type { APIRequestOptions } from "./lib/fixtures/apiRequest";
+import { TestOptions } from "./lib/pages";
 
 require("dotenv").config();
 

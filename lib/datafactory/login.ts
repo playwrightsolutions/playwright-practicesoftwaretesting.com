@@ -1,6 +1,16 @@
 import { expect, request } from "@playwright/test";
+import { StaticVariables } from "../helpers/staticVariables";
 
-let apiURL = process.env.API_URL;
+let apiURL;
+
+// hardcoding the url
+apiURL = "https://api.practicesoftwaretesting.com";
+
+// using env variables directly
+apiURL = process.env.API_URL;
+
+// using a dedicated class to access variables
+apiURL = StaticVariables.staticApiURL;
 
 export async function getLoginToken(email: string, password: string) {
   const createRequestContext = await request.newContext();

@@ -7,7 +7,7 @@ test.describe("Basic UI Checks With API Fixture", () => {
   const password = process.env.PASSWORD || "";
 
   test.beforeEach(async ({ page, apiRequest }) => {
-    // Gets Login Token via API call using apiBaseURL from fixture
+    // Gets Login Token via API call using apiBaseURL from fixture but all within the fixture so you don't event need to add apiURL to the test
     const response = await apiRequest.post("/users/login", {
       data: {
         email: username,
