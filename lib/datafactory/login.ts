@@ -1,5 +1,5 @@
 import { expect, request } from "@playwright/test";
-import { StaticVariables } from "../helpers/staticVariables";
+import { StaticVariables } from "@helpers/staticVariables";
 
 let apiURL;
 

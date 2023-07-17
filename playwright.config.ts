@@ -5,6 +5,13 @@ import { TestOptions } from "./lib/pages";
 require("dotenv").config();
 
 export default defineConfig<APIRequestOptions & TestOptions>({
+  projects: [
+    { name: "setup", testMatch: /.*\.setup\.ts/, fullyParallel: true },
+    {
+      name: "ui-tests",
+      dependencies: ["setup"],
+    },
+  ],
   testDir: "./tests",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
@@ -12,9 +19,10 @@ export default defineConfig<APIRequestOptions & TestOptions>({
   workers: process.env.CI ? 1 : undefined,
   reporter: [["html"], ["list"]],
   use: {
+    testIdAttribute: "data-test",
     baseURL: process.env.UI_URL,
     apiURL: process.env.API_URL,
     apiBaseURL: process.env.API_URL,
-    trace: "retain-on-failure",
+    trace: "on",
   },
 });

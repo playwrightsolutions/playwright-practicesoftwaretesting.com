@@ -1,10 +1,10 @@
 import { expect } from "@playwright/test";
-import { test, CheckoutPage, HomePage } from "../lib/pages";
-import { getLoginToken } from "../lib/datafactory/login";
+import { test, CheckoutPage, HomePage } from "@pages";
+import { getLoginToken } from "@datafactory/login";
 
 test.describe("Basic UI Checks", () => {
-  const username = process.env.USERNAME || "";
-  const password = process.env.PASSWORD || "";
+  const username = process.env.CUSTOMER_01_USERNAME || "";
+  const password = process.env.CUSTOMER_01_PASSWORD || "";
 
   test.beforeEach(async ({ page }) => {
     // Gets Login Token via API call

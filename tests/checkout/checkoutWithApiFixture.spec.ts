@@ -1,13 +1,14 @@
 import { expect } from "@playwright/test";
-import { test, CheckoutPage, HomePage } from "../lib/pages";
+import { test } from "@fixtures/apiRequest";
+import { CheckoutPage, HomePage } from "@pages";
 
-test.describe("Basic UI Checks With Page Fixture", () => {
-  const username = process.env.USERNAME || "";
-  const password = process.env.PASSWORD || "";
+test.describe("Basic UI Checks With API Fixture", () => {
+  const username = process.env.CUSTOMER_01_USERNAME || "";
+  const password = process.env.CUSTOMER_01_PASSWORD || "";
 
-  test.beforeEach(async ({ page, request, apiURL }) => {
-    // Gets Login Token via API call using apiBaseURL from fixture
-    const response = await request.post(apiURL + "/users/login", {
+  test.beforeEach(async ({ page, apiRequest }) => {
+    // Gets Login Token via API call using apiBaseURL from fixture but all within the fixture so you don't event need to add apiURL to the test
+    const response = await apiRequest.post("/users/login", {
       data: {
         email: username,
         password: password,
