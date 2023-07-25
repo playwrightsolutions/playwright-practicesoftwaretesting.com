@@ -34,7 +34,7 @@ test.describe("Customer brands specs", () => {
     );
     await page.goto("/#/admin/brands");
     await expect(page.getByTestId("email")).toBeVisible();
-    await expect(page.url()).toContain("/#/auth/login1");
+    await expect(page.url()).toContain("/#/auth/login");
 
     let request = await requestFinishedPromise;
     console.log(request.timing());
