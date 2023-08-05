@@ -15,6 +15,6 @@ test.describe("Testing retries ", () => {
     );
     await page.goto("/#/admin/brands");
     await expect(page.getByTestId("email")).toBeVisible();
-    await expect(page.url()).toContain("/#/auth/login1");
+    await expect(page.url()).toContain("/#/auth/login");
   });
 });
