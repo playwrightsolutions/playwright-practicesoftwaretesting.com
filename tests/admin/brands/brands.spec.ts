@@ -24,12 +24,19 @@ test.describe("Customer brands specs", () => {
   test("login with valid customer credentials and validate brands page is unreachable", async ({
     page,
   }) => {
+    // Example on how to capture network requests timings within a test.
+    const requestFinishedPromise = page.waitForEvent("requestfinished");
+
     await page.goto("/");
+
     expect(await page.getByTestId("nav-user-menu").innerText()).toContain(
       "Jane Doe"
     );
     await page.goto("/#/admin/brands");
     await expect(page.getByTestId("email")).toBeVisible();
     await expect(page.url()).toContain("/#/auth/login");
+
+    let request = await requestFinishedPromise;
+    console.log(request.timing());
   });
 });
