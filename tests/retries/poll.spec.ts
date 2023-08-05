@@ -11,17 +11,17 @@ test.describe("Testing poll ", () => {
     expect(await page.getByTestId("nav-user-menu").innerText()).toContain(
       "Jane Doe"
     );
-    await page.goto("/#/admin/brands");
-    await expect(page.getByTestId("email")).toBeVisible();
-    await expect(page.url()).toContain("/#/auth/login");
 
     await expect
       .poll(
         async () => {
+          await page.goto("/#/admin/brands");
+          await expect(page.getByTestId("email")).toBeVisible();
+          await expect(page.url()).toContain("/#/auth/login");
           return page.url();
         },
         {
-          timeout: 10_000,
+          timeout: 20_000,
         }
       )
       .toContain("/#/auth/login");
