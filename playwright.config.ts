@@ -5,6 +5,7 @@ import { TestOptions } from "./lib/pages";
 require("dotenv").config();
 
 export default defineConfig<APIRequestOptions & TestOptions>({
+  timeout: 30_000,
   projects: [
     { name: "setup", testMatch: /.*\.setup\.ts/, fullyParallel: true },
     {
