@@ -20,7 +20,7 @@ test.describe("Basic UI Checks", () => {
     productId = await productIdRoute(page);
   });
 
-  test.only("Add to Cart and Checkout", async ({ page }) => {
+  test("Add to Cart and Checkout", async ({ page }) => {
     const homePage = new HomePage(page);
     const checkoutPage = new CheckoutPage(page);
 
