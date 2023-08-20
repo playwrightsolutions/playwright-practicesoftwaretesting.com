@@ -1,6 +1,7 @@
 import { expect } from "@playwright/test";
 import { test, CheckoutPage, HomePage } from "@pages";
 import { getLoginToken } from "@datafactory/login";
+import { productIdRoute } from "@fixtures/productPageRoute";
 
 test.describe("Basic UI Checks", () => {
   const username = process.env.CUSTOMER_01_USERNAME || "";
@@ -16,18 +17,10 @@ test.describe("Basic UI Checks", () => {
       window.localStorage.setItem("auth-token", value);
     }, token);
 
-    await page.route(
-      "**/products?between=price,1,100&page=1",
-      async (route) => {
-        const response = await route.fetch();
-        let body = await response.json();
-        productId = body.data[1].id;
-        route.continue();
-      }
-    );
+    productId = await productIdRoute(page);
   });
 
-  test("Add to Cart and Checkout", async ({ page }) => {
+  test.only("Add to Cart and Checkout", async ({ page }) => {
     const homePage = new HomePage(page);
     const checkoutPage = new CheckoutPage(page);
 
