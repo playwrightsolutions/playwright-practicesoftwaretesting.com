@@ -5,6 +5,7 @@ import { getLoginToken } from "@datafactory/login";
 test.describe("Basic UI Checks", () => {
   const username = process.env.CUSTOMER_01_USERNAME || "";
   const password = process.env.CUSTOMER_01_PASSWORD || "";
+  let productId;
 
   test.beforeEach(async ({ page }) => {
     // Gets Login Token via API call
@@ -14,6 +15,16 @@ test.describe("Basic UI Checks", () => {
     await page.addInitScript((value) => {
       window.localStorage.setItem("auth-token", value);
     }, token);
+
+    await page.route(
+      "**/products?between=price,1,100&page=1",
+      async (route) => {
+        const response = await route.fetch();
+        let body = await response.json();
+        productId = body.data[1].id;
+        route.continue();
+      }
+    );
   });
 
   test("Add to Cart and Checkout", async ({ page }) => {
@@ -21,8 +32,7 @@ test.describe("Basic UI Checks", () => {
     const checkoutPage = new CheckoutPage(page);
 
     await homePage.goto();
-
-    await homePage.product2.click();
+    await homePage.productId(productId).click();
     await homePage.addToCart.click();
     await homePage.navCart.click();
 

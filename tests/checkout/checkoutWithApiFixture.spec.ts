@@ -5,6 +5,7 @@ import { CheckoutPage, HomePage } from "@pages";
 test.describe("Basic UI Checks With API Fixture", () => {
   const username = process.env.CUSTOMER_01_USERNAME || "";
   const password = process.env.CUSTOMER_01_PASSWORD || "";
+  let productId;
 
   test.beforeEach(async ({ page, apiRequest }) => {
     // Gets Login Token via API call using apiBaseURL from fixture but all within the fixture so you don't event need to add apiURL to the test
@@ -24,6 +25,16 @@ test.describe("Basic UI Checks With API Fixture", () => {
     await page.addInitScript((value) => {
       window.localStorage.setItem("auth-token", value);
     }, token);
+
+    await page.route(
+      "**/products?between=price,1,100&page=1",
+      async (route) => {
+        const response = await route.fetch();
+        let body = await response.json();
+        productId = body.data[1].id;
+        route.continue();
+      }
+    );
   });
 
   test("Add to Cart and Checkout", async ({ page }) => {
@@ -32,7 +43,7 @@ test.describe("Basic UI Checks With API Fixture", () => {
 
     await homePage.goto();
 
-    await homePage.product2.click();
+    await homePage.productId(productId).click();
     await homePage.addToCart.click();
     await homePage.navCart.click();
 
