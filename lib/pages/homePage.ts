@@ -1,3 +1,4 @@
+import { productIdRoute } from "@fixtures/productPageRoute";
 import { Page } from "@playwright/test";
 
 export class HomePage {
@@ -12,6 +13,11 @@ export class HomePage {
 
   async goto() {
     await this.page.goto("/#/");
+  }
+
+  async clickProductIdFor(name: string) {
+    const productId = await productIdRoute(this.page, name);
+    await this.productId(productId).click();
   }
 
   constructor(private readonly page: Page) {}
