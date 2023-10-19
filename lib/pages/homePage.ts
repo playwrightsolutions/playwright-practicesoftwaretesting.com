@@ -5,7 +5,7 @@ export class HomePage {
   readonly productId = (id: string) =>
     this.page.locator(`[data-test="product-${id}"]`);
   readonly product2 = this.page.locator(
-    '[data-test="product-01H88E5BMA2F3PX6VYX2NS3KX4"]'
+    '[data-test="product-01HD4AMP47V3XJD3KMHK7HW3ME"]'
   );
 
   readonly addToCart = this.page.locator('[data-test="add-to-cart"]');
