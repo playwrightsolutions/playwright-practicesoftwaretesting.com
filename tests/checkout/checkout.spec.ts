@@ -1,10 +1,12 @@
 import { expect } from "@playwright/test";
 import { test, CheckoutPage, HomePage } from "@pages";
 import { getLoginToken } from "@datafactory/login";
+import { productIdRoute } from "@fixtures/productPageRoute";
 
 test.describe("Basic UI Checks", () => {
   const username = process.env.CUSTOMER_01_USERNAME || "";
   const password = process.env.CUSTOMER_01_PASSWORD || "";
+  let productId;
 
   test.beforeEach(async ({ page }) => {
     // Gets Login Token via API call
@@ -14,6 +16,8 @@ test.describe("Basic UI Checks", () => {
     await page.addInitScript((value) => {
       window.localStorage.setItem("auth-token", value);
     }, token);
+
+    productId = await productIdRoute(page);
   });
 
   test("Add to Cart and Checkout", async ({ page }) => {
@@ -21,8 +25,7 @@ test.describe("Basic UI Checks", () => {
     const checkoutPage = new CheckoutPage(page);
 
     await homePage.goto();
-
-    await homePage.product2.click();
+    await homePage.productId(productId).click();
     await homePage.addToCart.click();
     await homePage.navCart.click();
 

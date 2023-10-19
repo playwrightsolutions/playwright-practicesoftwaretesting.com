@@ -1,6 +1,7 @@
 import { expect } from "@playwright/test";
 import { test } from "@fixtures/apiRequest";
 import { CheckoutPage, HomePage } from "@pages";
+import { productIdRoute } from "@fixtures/productPageRoute";
 
 test.describe("Basic UI Checks With API Fixture", () => {
   const username = process.env.CUSTOMER_01_USERNAME || "";
@@ -32,7 +33,7 @@ test.describe("Basic UI Checks With API Fixture", () => {
 
     await homePage.goto();
 
-    await homePage.product2.click();
+    await homePage.clickProductIdFor("Pliers");
     await homePage.addToCart.click();
     await homePage.navCart.click();
 

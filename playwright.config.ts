@@ -25,5 +25,7 @@ export default defineConfig<APIRequestOptions & TestOptions>({
     apiURL: process.env.API_URL,
     apiBaseURL: process.env.API_URL,
     trace: "on",
+    screenshot: "only-on-failure",
+    video: "retain-on-failure",
   },
 });
