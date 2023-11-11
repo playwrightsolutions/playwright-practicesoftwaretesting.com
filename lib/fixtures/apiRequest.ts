@@ -8,7 +8,7 @@ type APIRequestFixture = {
   apiRequest: APIRequestContext;
 };
 
-// This fixre will override baseURL with apiBaseURL from playwright.config.ts whenever it is used
+// This fixture will override baseURL with apiBaseURL from playwright.config.ts whenever it is used
 export const test = base.extend<APIRequestOptions & APIRequestFixture>({
   apiBaseURL: ["", { option: true }],
 

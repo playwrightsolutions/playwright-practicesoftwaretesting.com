@@ -1,6 +1,7 @@
 node_modules/
 /test-results/
 /playwright-report/
+/playwright-report-archive/
 /playwright/.cache/
 .auth/
 *_spec3.json
