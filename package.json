@@ -3,15 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test && npx ts-node lib/helpers/archivePlaywrightReport.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.37.1",
-    "typescript": "^5.1.6"
+    "@playwright/test": "^1.39",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
-    "dotenv": "^16.3.0"
+    "dotenv": "^16.3.0",
+    "ts-node": "^10.9.1"
   }
 }

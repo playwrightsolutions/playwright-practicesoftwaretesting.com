@@ -13,26 +13,31 @@ import { HomePage } from "@pages";
  */
 export async function productIdRoute(page: any, name?: string) {
   let productId;
+  let productApiUrl =
+    "https://api.practicesoftwaretesting.com/products?between=price,1,100&page=1";
 
-  await page.route(
-    "https://api.practicesoftwaretesting.com/products?between=price,1,100&page=1",
-    async (route) => {
-      let body;
-      const response = await route.fetch();
-      body = await response.json();
-      if (name) {
-        productId = findIdByName(body, name);
-        console.log("pid: " + productId);
-      } else {
-        // Get the second product in the list
-        productId = body.data[1].id;
-      }
-      route.continue();
+  await page.route(productApiUrl, async (route) => {
+    let body;
+    const response = await route.fetch();
+    body = await response.json();
+    if (name) {
+      productId = findIdByName(body, name);
+      // console.log("pid: " + productId);
+    } else {
+      // Get the second product in the list
+      productId = body.data[1].id;
     }
-  );
+    route.continue();
+  });
 
   const homePage = new HomePage(page);
-  await homePage.goto();
+
+  // In case productId is undefined attempt to get it before we return it
+  for (let i = 0; i < 5 && !productId; i++) {
+    await homePage.goto();
+    await page.waitForResponse(productApiUrl);
+    // assuming that productId is updated here after the API call
+  }
 
   return productId;
 }

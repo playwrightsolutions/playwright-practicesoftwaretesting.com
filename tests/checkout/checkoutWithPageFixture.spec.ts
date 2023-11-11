@@ -5,6 +5,7 @@ test.describe("Basic UI Checks With Page Fixture", () => {
   const username = process.env.CUSTOMER_01_USERNAME || "";
   const password = process.env.CUSTOMER_01_PASSWORD || "";
   let productId;
+  const productApiUrl = "**/products?between=price,1,100&page=1";
 
   test.beforeEach(async ({ page, request, apiURL }) => {
     // Gets Login Token via API call using apiBaseURL from fixture
@@ -25,15 +26,18 @@ test.describe("Basic UI Checks With Page Fixture", () => {
       window.localStorage.setItem("auth-token", value);
     }, token);
 
-    await page.route(
-      "**/products?between=price,1,100&page=1",
-      async (route) => {
-        const response = await route.fetch();
-        let body = await response.json();
-        productId = body.data[1].id;
-        route.continue();
-      }
-    );
+    await page.route(productApiUrl, async (route) => {
+      const response = await route.fetch();
+      let body = await response.json();
+      productId = body.data[1].id;
+      route.continue();
+    });
+
+    const homePage = new HomePage(page);
+    for (let i = 0; i < 5 && !productId; i++) {
+      await homePage.goto();
+      await page.waitForResponse(productApiUrl);
+    }
   });
 
   test("Add to Cart and Checkout", async ({ page }) => {
