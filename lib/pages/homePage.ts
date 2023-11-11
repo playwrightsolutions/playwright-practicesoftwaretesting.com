@@ -22,5 +22,10 @@ export class HomePage {
     await this.productId(productId).click();
   }
 
+  async clickProductIdFor(name: string) {
+    const productId = await productIdRoute(this.page, name);
+    await this.productId(productId).click();
+  }
+
   constructor(private readonly page: Page) {}
 }
