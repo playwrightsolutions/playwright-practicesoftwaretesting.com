@@ -4,8 +4,17 @@ on:
     branches: [main, master]
   pull_request:
     branches: [main, master]
+  schedule:
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+
 jobs:
   test:
+    strategy:
+      fail-fast: false
+      matrix:
+        # run 3 copies of the current job in parallel
+        shard: [1, 2, 3]
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -17,8 +26,17 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+
       - name: Run Playwright tests
-        run: npx playwright test
+        env:
+          CURRENTS_PROJECT_ID: ${{ secrets.CURRENTS_PROJECT_ID }}
+          CURRENTS_RECORD_KEY: ${{ secrets.CURRENTS_RECORD_KEY }}
+          CURRENTS_CI_BUILD_ID: reporter-${{ github.repository }}-${{ github.run_id }}-${{ github.run_attempt }}
+
+        run: |
+          echo "The github event is: ${{ github.event_name }}"
+          npx playwright test --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+
       - uses: actions/upload-artifact@v3
         if: always()
         with:
