@@ -1,9 +1,7 @@
-import { test } from "@fixtures/modifiedGoto";
-import { expect } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 
 test("Home Page Tests", async ({ page }) => {
-  await page.goto("/#/");
-  expect(page.url()).toContain("?UTM_SOURCE=playwright");
+  await page.goto("");
 
   await page.getByTestId("nav-contact").click();
   await page.getByTestId("first-name").fill("Test");
