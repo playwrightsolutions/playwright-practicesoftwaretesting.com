@@ -5,6 +5,7 @@ node_modules/
 /playwright/.cache/
 .auth/
 *_spec3.json
+coverage-output.txt
 
 # System Files
 .DS_Store

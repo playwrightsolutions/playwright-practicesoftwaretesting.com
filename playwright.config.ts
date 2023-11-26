@@ -9,8 +9,13 @@ export default defineConfig<APIRequestOptions & TestOptions>({
   projects: [
     { name: "setup", testMatch: /.*\.setup\.ts/, fullyParallel: true },
     {
+      name: "calculation",
+      testMatch: /.*\.calculation\.ts/,
+    },
+
+    {
       name: "ui-tests",
-      dependencies: ["setup"],
+      dependencies: ["setup", "calculation"],
     },
   ],
   testDir: "./tests",
