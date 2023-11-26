@@ -1,0 +1,59 @@
+- page: "/auth/login"
+  features:
+    sign in with google: false
+    email: true
+    password: true
+    login: true
+    register your account: false
+    forgot password: false
+- page: "/auth/forgot-password"
+  features:
+    email: false
+    set new password: false
+- page: "/auth/register"
+  features:
+    first name: false
+    last name: false
+    date of birth: false
+    address: false
+    postcode: false
+    city: false
+    state: false
+    country: false
+    phone rate: false
+    e-mail address: false
+    password: false
+    register button: false
+- page: "/category/hand-tools"
+  features:
+    header: true
+    sidebar:
+      sort: false
+      filters: false
+      by brand: false
+    product card:
+      image: false
+      image zoom: false
+      title: false
+      price: false
+    pagination:
+      previous: false
+      next: false
+      number: false
+- page: "/product/{id}"
+  features:
+    header: false
+    product details:
+      image: false
+      title: false
+      tags: false
+      price: false
+      description: false
+      quantity: false
+      add to cart: false
+      add to favorites: false
+    related products:
+      image: false
+      title: false
+      more information: false
+    footer: false
