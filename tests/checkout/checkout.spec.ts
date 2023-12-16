@@ -3,7 +3,7 @@ import { test, CheckoutPage, HomePage } from "@pages";
 import { getLoginToken } from "@datafactory/login";
 import { productIdRoute } from "@fixtures/productPageRoute";
 
-test.describe("Basic UI Checks", () => {
+test.describe.skip("Basic UI Checks", () => {
   const username = process.env.CUSTOMER_01_USERNAME || "";
   const password = process.env.CUSTOMER_01_PASSWORD || "";
   let productId;

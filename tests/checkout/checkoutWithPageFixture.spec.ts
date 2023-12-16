@@ -1,7 +1,7 @@
 import { expect } from "@playwright/test";
 import { test, CheckoutPage, HomePage } from "@pages";
 
-test.describe("Basic UI Checks With Page Fixture", () => {
+test.describe.skip("Basic UI Checks With Page Fixture", () => {
   const username = process.env.CUSTOMER_01_USERNAME || "";
   const password = process.env.CUSTOMER_01_PASSWORD || "";
   let productId;

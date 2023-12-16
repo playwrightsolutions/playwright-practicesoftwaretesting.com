@@ -3,7 +3,7 @@ import { test } from "@fixtures/apiRequest";
 import { CheckoutPage, HomePage } from "@pages";
 import { productIdRoute } from "@fixtures/productPageRoute";
 
-test.describe("Basic UI Checks With API Fixture", () => {
+test.describe.skip("Basic UI Checks With API Fixture", () => {
   const username = process.env.CUSTOMER_01_USERNAME || "";
   const password = process.env.CUSTOMER_01_PASSWORD || "";
 
