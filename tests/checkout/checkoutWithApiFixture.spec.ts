@@ -3,7 +3,7 @@ import { test } from "@fixtures/apiRequest";
 import { CheckoutPage, HomePage } from "@pages";
 import { productIdRoute } from "@fixtures/productPageRoute";
 
-test.describe.skip("Basic UI Checks With API Fixture", () => {
+test.describe("Basic UI Checks With API Fixture", () => {
   const username = process.env.CUSTOMER_01_USERNAME || "";
   const password = process.env.CUSTOMER_01_PASSWORD || "";
 
@@ -48,8 +48,6 @@ test.describe.skip("Basic UI Checks With API Fixture", () => {
     await checkoutPage.proceed3.click();
     await checkoutPage.paymentMethod.selectOption("2: Cash on Delivery");
 
-    await checkoutPage.accountName.fill("testy");
-    await checkoutPage.accountNumber.fill("1234124");
     await checkoutPage.finish.click();
 
     await expect(checkoutPage.success.first()).toBeVisible();

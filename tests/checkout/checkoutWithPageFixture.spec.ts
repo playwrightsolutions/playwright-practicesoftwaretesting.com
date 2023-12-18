@@ -1,7 +1,7 @@
 import { expect } from "@playwright/test";
 import { test, CheckoutPage, HomePage } from "@pages";
 
-test.describe.skip("Basic UI Checks With Page Fixture", () => {
+test.describe("Basic UI Checks With Page Fixture", () => {
   const username = process.env.CUSTOMER_01_USERNAME || "";
   const password = process.env.CUSTOMER_01_PASSWORD || "";
   let productId;
@@ -61,8 +61,6 @@ test.describe.skip("Basic UI Checks With Page Fixture", () => {
     await checkoutPage.proceed3.click();
     await checkoutPage.paymentMethod.selectOption("2: Cash on Delivery");
 
-    await checkoutPage.accountName.fill("testy");
-    await checkoutPage.accountNumber.fill("1234124");
     await checkoutPage.finish.click();
 
     await expect(checkoutPage.success.first()).toBeVisible();
