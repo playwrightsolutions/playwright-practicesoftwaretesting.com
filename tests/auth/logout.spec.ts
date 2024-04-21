@@ -30,7 +30,7 @@ test.describe("Logout Specs", () => {
     const adminPage = await adminContext.newPage();
     const loginPage = new LoginPage(adminPage);
     await loginPage.goto();
-    await loginPage.navAdminMenu.click();
+    await loginPage.navMenu.click();
     await loginPage.navSignOut.click();
 
     await expect(loginPage.navSignIn).toBeVisible();
@@ -44,7 +44,7 @@ test.describe("Logout Specs", () => {
     const loginPage = new LoginPage(customerPage);
 
     await loginPage.goto();
-    await loginPage.navUserMenu.click();
+    await loginPage.navMenu.click();
     await loginPage.navSignOut.click();
 
     await expect(loginPage.navSignIn).toBeVisible();

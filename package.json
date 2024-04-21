@@ -12,6 +12,7 @@
   "devDependencies": {
     "@currents/playwright": "^0.10.6",
     "@playwright/test": "^1.40",
+    "indent-list-reporter": "^1.0.7",
     "typescript": "^5.2.2"
   },
   "dependencies": {

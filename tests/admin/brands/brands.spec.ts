@@ -7,7 +7,7 @@ test.describe("Admin brands specs", () => {
     page,
   }) => {
     await page.goto("/");
-    expect(await page.getByTestId("nav-admin-menu").innerText()).toContain(
+    expect(await page.getByTestId("nav-menu").innerText()).toContain(
       "John Doe"
     );
     await page.goto("/#/admin/brands");
@@ -29,7 +29,7 @@ test.describe("Customer brands specs", () => {
 
     await page.goto("/");
 
-    expect(await page.getByTestId("nav-user-menu").innerText()).toContain(
+    expect(await page.getByTestId("nav-menu").innerText()).toContain(
       "Jane Doe"
     );
     await page.goto("/#/admin/brands");

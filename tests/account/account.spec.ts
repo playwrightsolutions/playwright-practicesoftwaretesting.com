@@ -6,7 +6,7 @@ test.describe("Customer 01 my account specs", () => {
   test("validate customer 01 my account page", async ({ page }) => {
     await page.goto("/#/account");
 
-    expect(await page.getByTestId("nav-user-menu").innerText()).toContain(
+    expect(await page.getByTestId("nav-menu").innerText()).toContain(
       "Jane Doe"
     );
     expect(await page.getByTestId("page-title").innerText()).toContain(
@@ -24,7 +24,7 @@ test.describe("Customer 02 my account specs", () => {
   test("validate customer 02 my account page", async ({ page }) => {
     await page.goto("/#/account");
 
-    expect(await page.getByTestId("nav-user-menu").innerText()).toContain(
+    expect(await page.getByTestId("nav-menu").innerText()).toContain(
       "Jack Howe"
     );
     expect(await page.getByTestId("page-title").innerText()).toContain(
@@ -43,7 +43,7 @@ test.describe("Admin my account specs", () => {
     await page.goto("/#/account");
 
     expect(page.url()).toContain("/#/auth/login");
-    expect(await page.getByTestId("nav-admin-menu").innerText()).toContain(
+    expect(await page.getByTestId("nav-menu").innerText()).toContain(
       "John Doe"
     );
   });

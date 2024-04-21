@@ -25,7 +25,18 @@ export default defineConfig<APIRequestOptions & TestOptions>({
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI
     ? [["list"], ["html"], ["@currents/playwright"]]
-    : [["list"], ["html"]],
+    : [
+        ["html"],
+        ["list"],
+        //["indent-list-reporter"],
+        // {
+        //   baseColors: {
+        //     specFileNameColor: "white",
+        //     suiteDescriptionColor: "blue",
+        //     testCaseTitleColor: "magenta",
+        //   },
+        // },
+      ],
   use: {
     testIdAttribute: "data-test",
     baseURL: process.env.UI_URL,

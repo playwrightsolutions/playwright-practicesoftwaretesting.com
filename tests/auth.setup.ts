@@ -20,7 +20,7 @@ setup("Create Admin Auth", async ({ page, context }) => {
   await loginPage.goto();
 
   await loginPage.login(adminEmail, adminPassword);
-  expect(await loginPage.navAdminMenu.innerText()).toContain("John Doe");
+  expect(await loginPage.navMenu.innerText()).toContain("John Doe");
 
   await context.storageState({ path: adminAuthFile });
 });
@@ -30,7 +30,7 @@ setup("Create Customer 01 Auth", async ({ page, context }) => {
   await loginPage.goto();
 
   await loginPage.login(customer01Email, customer01Password);
-  expect(await loginPage.navUserMenu.innerText()).toContain("Jane Doe");
+  expect(await loginPage.navMenu.innerText()).toContain("Jane Doe");
 
   await context.storageState({ path: customer01AuthFile });
 });
@@ -40,7 +40,7 @@ setup("Create Customer 02 Auth", async ({ page, context }) => {
   await loginPage.goto();
 
   await loginPage.login(customer02Email, customer02Password);
-  expect(await loginPage.navUserMenu.innerText()).toContain("Jack Howe");
+  expect(await loginPage.navMenu.innerText()).toContain("Jack Howe");
 
   await context.storageState({ path: customer02AuthFile });
 });

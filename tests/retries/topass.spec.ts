@@ -9,7 +9,7 @@ test.describe("Testing toPass ", () => {
     await expect(async () => {
       await page.goto("/");
 
-      expect(await page.getByTestId("nav-user-menu").innerText()).toContain(
+      expect(await page.getByTestId("nav-menu").innerText()).toContain(
         "Jane Doe"
       );
       await page.goto("/#/admin/brands");

@@ -13,7 +13,7 @@ test.describe("Login Specs", () => {
     await loginPage.goto();
     await loginPage.login(adminEmail, adminPassword);
 
-    expect(await loginPage.navAdminMenu.innerText()).toContain("John Doe");
+    expect(await loginPage.navMenu.innerText()).toContain("John Doe");
     // Add additional assertions
   });
 
@@ -22,7 +22,7 @@ test.describe("Login Specs", () => {
     await loginPage.goto();
     await loginPage.login(customerEmail, customerPassword);
 
-    expect(await loginPage.navUserMenu.innerText()).toContain("Jane Doe");
+    expect(await loginPage.navMenu.innerText()).toContain("Jane Doe");
     // Add additional assertions
   });
 });

@@ -8,7 +8,7 @@ test.describe("Testing poll ", () => {
   }) => {
     await page.goto("/");
 
-    expect(await page.getByTestId("nav-user-menu").innerText()).toContain(
+    expect(await page.getByTestId("nav-menu").innerText()).toContain(
       "Jane Doe"
     );
 
