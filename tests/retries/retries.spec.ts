@@ -10,7 +10,7 @@ test.describe("Testing retries ", () => {
   }) => {
     await page.goto("/");
 
-    expect(await page.getByTestId("nav-user-menu").innerText()).toContain(
+    expect(await page.getByTestId("nav-menu").innerText()).toContain(
       "Jane Doe"
     );
     await page.goto("/#/admin/brands");
