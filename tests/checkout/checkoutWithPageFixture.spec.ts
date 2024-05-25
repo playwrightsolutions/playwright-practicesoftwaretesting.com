@@ -59,7 +59,7 @@ test.describe("Basic UI Checks With Page Fixture", () => {
     await checkoutPage.postcode.fill("12345");
 
     await checkoutPage.proceed3.click();
-    await checkoutPage.paymentMethod.selectOption("2: Cash on Delivery");
+    await checkoutPage.paymentMethod.selectOption("Cash on Delivery");
 
     await checkoutPage.finish.click();
 
