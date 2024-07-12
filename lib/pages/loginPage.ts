@@ -6,12 +6,12 @@ export class LoginPage {
   readonly submit = this.page.getByTestId("login-submit");
   readonly navUserMenu = this.page.getByTestId("nav-user-menu");
   readonly navAdminMenu = this.page.getByTestId("nav-admin-menu");
-  readonly navMenu =this.page.getByTestId("nav-menu");
+  readonly navMenu = this.page.getByTestId("nav-menu");
   readonly navSignOut = this.page.getByTestId("nav-sign-out");
   readonly navSignIn = this.page.getByTestId("nav-sign-in");
 
   async goto() {
-    await this.page.goto("/#/auth/login");
+    await this.page.goto("/auth/login");
   }
 
   async login(email: string, password: string) {

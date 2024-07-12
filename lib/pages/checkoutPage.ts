@@ -21,7 +21,7 @@ export class CheckoutPage {
   });
 
   async goto() {
-    await this.page.goto("/#/checkout");
+    await this.page.goto("/checkout");
   }
 
   constructor(private readonly page: Page) {}

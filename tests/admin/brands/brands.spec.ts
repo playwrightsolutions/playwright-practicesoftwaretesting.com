@@ -10,11 +10,11 @@ test.describe("Admin brands specs", () => {
     expect(await page.getByTestId("nav-menu").innerText()).toContain(
       "John Doe"
     );
-    await page.goto("/#/admin/brands");
+    await page.goto("/admin/brands");
     expect(await page.getByTestId("page-title").innerText()).toContain(
       "Brands"
     );
-    await expect(page.url()).toContain("/#/admin/brands");
+    await expect(page.url()).toContain("/admin/brands");
   });
 });
 
@@ -32,9 +32,9 @@ test.describe("Customer brands specs", () => {
     expect(await page.getByTestId("nav-menu").innerText()).toContain(
       "Jane Doe"
     );
-    await page.goto("/#/admin/brands");
+    await page.goto("/admin/brands");
     await expect(page.getByTestId("email")).toBeVisible();
-    await expect(page.url()).toContain("/#/auth/login");
+    await expect(page.url()).toContain("/auth/login");
 
     let request = await requestFinishedPromise;
     console.log(request.timing());
