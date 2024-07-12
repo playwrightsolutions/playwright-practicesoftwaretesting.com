@@ -15,15 +15,15 @@ test.describe("Testing poll ", () => {
     await expect
       .poll(
         async () => {
-          await page.goto("/#/admin/brands");
+          await page.goto("/admin/brands");
           await expect(page.getByTestId("email")).toBeVisible();
-          await expect(page.url()).toContain("/#/auth/login");
+          await expect(page.url()).toContain("/auth/login");
           return page.url();
         },
         {
           timeout: 20_000,
         }
       )
-      .toContain("/#/auth/login");
+      .toContain("/auth/login");
   });
 });

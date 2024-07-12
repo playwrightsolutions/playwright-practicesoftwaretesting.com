@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test("Validate cart is updated from product details page", async ({ page }) => {
   const productName = "Claw Hammer with Shock Reduction Grip";
-  await page.goto("https://practicesoftwaretesting.com/#/");
+  await page.goto("https://practicesoftwaretesting.com/");
   await page.getByTestId("nav-categories").click();
   await page.getByTestId("nav-hand-tools").click();
   // create a playwright locator that will find a link with a child div that has text of "Claw Hammer with Shock Reduction Grip" and click the link

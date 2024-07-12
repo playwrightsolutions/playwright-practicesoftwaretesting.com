@@ -12,9 +12,9 @@ test.describe("Testing toPass ", () => {
       expect(await page.getByTestId("nav-menu").innerText()).toContain(
         "Jane Doe"
       );
-      await page.goto("/#/admin/brands");
+      await page.goto("/admin/brands");
       await expect(page.getByTestId("email")).toBeVisible();
-      await expect(page.url()).toContain("/#/auth/login");
+      await expect(page.url()).toContain("/auth/login");
     }).toPass({
       timeout: 10_000,
     });
