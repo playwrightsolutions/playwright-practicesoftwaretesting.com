@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test && npx ts-node lib/helpers/archivePlaywrightReport.ts"
+    "test": "npx playwright test && npx ts-node lib/helpers/archivePlaywrightReport.ts",
+    "home-test": "npx playwright test tests/home/home.spec.ts --config playwright-homespec.config.ts"
   },
   "keywords": [],
   "author": "",
