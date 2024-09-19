@@ -1,0 +1,38 @@
+[
+  {
+    "id": "01J82XSF2NFPC9KH9K4ZVM22F6",
+    "name": "Test Tools",
+    "slug": "hand-tools",
+    "parent_id": null,
+    "sub_categories": [
+      {
+        "id": "01J82XSF2R7MTZ55S7BQQDYJTH",
+        "name": "Selenium",
+        "slug": "Selenium",
+        "parent_id": "01J82XSF2NFPC9KH9K4ZVM22F6",
+        "sub_categories": []
+      },
+      {
+        "id": "01J82XSF2R7MTZ55S7BQQDYJTJ",
+        "name": "Playwright",
+        "slug": "Playwright",
+        "parent_id": "01J82XSF2NFPC9KH9K4ZVM22F6",
+        "sub_categories": []
+      },
+      {
+        "id": "01J82XSF2R7MTZ55S7BQQDYJTK",
+        "name": "Cypress",
+        "slug": "Cypress",
+        "parent_id": "01J82XSF2NFPC9KH9K4ZVM22F6",
+        "sub_categories": []
+      },
+      {
+        "id": "01J82XSF2R7MTZ55S7BQQDYJTH",
+        "name": "WebdriverIO",
+        "slug": "WebdriverIO",
+        "parent_id": "01J82XSF2NFPC9KH9K4ZVM22F6",
+        "sub_categories": []
+      }
+    ]
+  }
+]
