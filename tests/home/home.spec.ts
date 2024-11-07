@@ -39,7 +39,10 @@ test.describe("Home page specs", () => {
       );
     });
     await page.goto("/");
-    await page.waitForLoadState("networkidle");
+
+    // Wait for the data to load in before making assertions
+    await expect(page.locator(".skeleton").first()).not.toBeVisible();
+
     const productGrid = page.locator(".col-md-9");
     products.data.forEach(async (product: { name: string; price: string }) => {
       await expect(productGrid).toContainText(product.name);
@@ -56,9 +59,8 @@ test.describe("Home page specs", () => {
     });
 
     await page.goto("/");
-    await page.waitForLoadState("networkidle");
 
-    // This is data that should not be on the screen because we aborted the network request
+    // This is data that should not be on the screen
     await expect(
       page.getByText("SortName (A - Z)Name (Z - A)")
     ).not.toContainText("Power Tools");
@@ -82,7 +84,6 @@ test.describe("Home page specs", () => {
       );
     });
     await page.goto("/");
-    await page.waitForLoadState("networkidle");
     const productGrid = page.locator(".col-md-9");
     await expect(productGrid.getByRole("link").first()).toContainText(
       "Mocked Product"
@@ -103,7 +104,6 @@ test.describe("Home page specs", () => {
       });
     });
     await page.goto("/");
-    await page.waitForLoadState("networkidle");
     const productGrid = page.locator(".col-md-9");
     await expect(productGrid).toContainText("Happy Path Pliers");
     await expect(productGrid).toContainText("1.99");
@@ -132,9 +132,67 @@ test.describe("Home page specs", () => {
       );
     });
     await page.goto("/");
-    await page.waitForLoadState("networkidle");
     await expect(page.getByText("SortName (A - Z)Name (Z - A)")).toContainText(
       "Playwright"
     );
+  });
+
+  // Simulating a slow network request
+  test("validate loading animation while product is loading", async ({
+    page,
+  }) => {
+    await page.route(
+      "https://api.practicesoftwaretesting.com/products**",
+      async (route) => {
+        await page.waitForTimeout(4000);
+        await route.continue();
+      }
+    );
+    await page.goto("/");
+    const skeletonLocator = page.locator(".skeleton").first();
+    const imageBox = skeletonLocator.locator(".card-img-wrapper");
+
+    const animationProps = await imageBox.evaluate((el) => {
+      const styles = window.getComputedStyle(el);
+      return {
+        animationIterationCount: styles.animationIterationCount,
+        animationName: styles.animationName,
+        animationPlayState: styles.animationPlayState,
+      };
+    });
+
+    expect(animationProps.animationIterationCount).toBe("infinite");
+    expect(animationProps.animationName).toContain("_shimmer");
+    expect(animationProps.animationPlayState).toBe("running");
+
+    await expect(imageBox).not.toBeVisible();
+  });
+
+  test("validate ui when api us rate limited", async ({ page }) => {
+    let requestCount = 0;
+    await page.route(
+      "https://api.practicesoftwaretesting.com/products**",
+      async (route) => {
+        await route.fulfill({
+          status: 429,
+          body: "Too Many Requests",
+        });
+      }
+    );
+    await page.goto("/");
+    const skeletonLocator = page.locator(".skeleton").first();
+    const imageBox = skeletonLocator.locator(".card-img-wrapper");
+    const animationProps = await imageBox.evaluate((el) => {
+      const styles = window.getComputedStyle(el);
+      return {
+        animationIterationCount: styles.animationIterationCount,
+        animationName: styles.animationName,
+        animationPlayState: styles.animationPlayState,
+      };
+    });
+
+    expect(animationProps.animationIterationCount).toBe("infinite");
+    expect(animationProps.animationName).toContain("_shimmer");
+    expect(animationProps.animationPlayState).toBe("running");
   });
 });
