@@ -60,7 +60,7 @@ test.describe("Home page specs", () => {
 
     await page.goto("/");
 
-    // This is data that should not be on the screen because we aborted the network request
+    // This is data that should not be on the screen
     await expect(
       page.getByText("SortName (A - Z)Name (Z - A)")
     ).not.toContainText("Power Tools");
@@ -161,41 +161,38 @@ test.describe("Home page specs", () => {
       };
     });
 
-    // Assertions
     expect(animationProps.animationIterationCount).toBe("infinite");
     expect(animationProps.animationName).toContain("_shimmer");
     expect(animationProps.animationPlayState).toBe("running");
 
-    // No need to add a hard wait because the below assertion will auto wait
     await expect(imageBox).not.toBeVisible();
   });
-});
 
-test("validate ui when api us rate limited", async ({ page }) => {
-  let requestCount = 0;
-  await page.route(
-    "https://api.practicesoftwaretesting.com/products**",
-    async (route) => {
-      await route.fulfill({
-        status: 429,
-        body: "Too Many Requests",
-      });
-    }
-  );
-  await page.goto("/");
-  const skeletonLocator = page.locator(".skeleton").first();
-  const imageBox = skeletonLocator.locator(".card-img-wrapper");
-  const animationProps = await imageBox.evaluate((el) => {
-    const styles = window.getComputedStyle(el);
-    return {
-      animationIterationCount: styles.animationIterationCount,
-      animationName: styles.animationName,
-      animationPlayState: styles.animationPlayState,
-    };
+  test("validate ui when api us rate limited", async ({ page }) => {
+    let requestCount = 0;
+    await page.route(
+      "https://api.practicesoftwaretesting.com/products**",
+      async (route) => {
+        await route.fulfill({
+          status: 429,
+          body: "Too Many Requests",
+        });
+      }
+    );
+    await page.goto("/");
+    const skeletonLocator = page.locator(".skeleton").first();
+    const imageBox = skeletonLocator.locator(".card-img-wrapper");
+    const animationProps = await imageBox.evaluate((el) => {
+      const styles = window.getComputedStyle(el);
+      return {
+        animationIterationCount: styles.animationIterationCount,
+        animationName: styles.animationName,
+        animationPlayState: styles.animationPlayState,
+      };
+    });
+
+    expect(animationProps.animationIterationCount).toBe("infinite");
+    expect(animationProps.animationName).toContain("_shimmer");
+    expect(animationProps.animationPlayState).toBe("running");
   });
-
-  // Assertions
-  expect(animationProps.animationIterationCount).toBe("infinite");
-  expect(animationProps.animationName).toContain("_shimmer");
-  expect(animationProps.animationPlayState).toBe("running");
 });
