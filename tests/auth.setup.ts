@@ -66,8 +66,9 @@ setup("Create TestyMctester Account", async ({ page, request, apiURL }) => {
   if (reqResponse.status() !== 200) {
     console.log("\x1b[33m%s\x1b[0m", "CREATE USER");
     await registerUser(playwrightUser, playwrightPassword);
-    const code = await createOTP(playwrightUser, playwrightPassword);
-    otp = generateOTP(code);
+    const key = await createOTP(playwrightUser, playwrightPassword);
+    process.env.OTP_KEY = key;
+    otp = generateOTP(key);
   }
 
   // // Generate Auth

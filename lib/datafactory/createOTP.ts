@@ -1,5 +1,6 @@
 import { expect, request } from "@playwright/test";
 import { getLoginToken } from "./login";
+import * as path from "path";
 import * as fs from "fs";
 
 let apiURL = process.env.API_URL;
@@ -20,11 +21,10 @@ export async function createOTP(email: string, password: string) {
 }
 
 function updateOTPSecret(secret: string): void {
-  // Read .env file
-  const envPath = ".env";
+  const projectRoot = process.cwd();
+  const envPath = path.resolve(projectRoot, ".env");
   const envContent = fs.readFileSync(envPath, "utf8");
 
-  // Replace OTP_SECRET line
   const updatedContent = envContent.replace(
     /OTP_SECRET=.*/,
     `OTP_SECRET=${secret}`
@@ -32,5 +32,6 @@ function updateOTPSecret(secret: string): void {
 
   // Write back to file
   fs.writeFileSync(envPath, updatedContent, "utf8");
-  console.log("OTP secret updated successfully");
+  console.log(`Updated .env file at: ${envPath}`);
+  console.log(`OTP secret is ${secret}`);
 }
