@@ -9,6 +9,8 @@ export class LoginPage {
   readonly navMenu = this.page.getByTestId("nav-menu");
   readonly navSignOut = this.page.getByTestId("nav-sign-out");
   readonly navSignIn = this.page.getByTestId("nav-sign-in");
+  readonly totp = this.page.locator("#totp");
+  readonly verifyTotp = this.page.getByTestId("verify-totp");
 
   async goto() {
     await this.page.goto("/auth/login");
