@@ -12,7 +12,7 @@
   "license": "ISC",
   "devDependencies": {
     "@currents/playwright": "^0.10.6",
-    "@playwright/test": "^1.40",
+    "@playwright/test": "^1.50",
     "indent-list-reporter": "^1.0.7",
     "typescript": "^5.2.2"
   },
@@ -20,6 +20,7 @@
     "dotenv": "^16.3.0",
     "feature-map": "^1.0.0",
     "js-yaml": "^4.1.0",
+    "@faker-js/faker": "^8.2.0",
     "otpauth": "^9.3.5",
     "ts-node": "^10.9.1"
   }
