@@ -49,4 +49,25 @@ test.describe("Logout Specs", () => {
 
     await expect(loginPage.navSignIn).toBeVisible();
   });
+
+  test("Logout due to inactivity", async ({ browser, page }) => {
+    const customerContext = await browser.newContext({
+      storageState: tempCustomerAuth,
+    });
+    const customerPage = await customerContext.newPage();
+    const loginPage = new LoginPage(customerPage);
+
+    await loginPage.goto();
+
+    await page.evaluate(() => {
+      document.dispatchEvent(new Event("visibilitychange"));
+      document.hidden = true;
+    });
+    // await loginPage.navMenu.click();
+    // await loginPage.navSignOut.click();
+
+    await loginPage.goto();
+
+    await expect(loginPage.navSignIn).toBeVisible();
+  });
 });

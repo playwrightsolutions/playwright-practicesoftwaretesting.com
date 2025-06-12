@@ -97,9 +97,10 @@ test.describe("Home page specs", () => {
   });
 
   test("validate product data is loaded from har file", async ({ page }) => {
+    test.setTimeout(15_000);
     await test.step("Intercept /products", async () => {
       await page.routeFromHAR(".hars/product.har", {
-        url: "https://api.practicesoftwaretesting.com/products**",
+        url: /https:\/\/api\.practicesoftwaretesting\.com\/products.*/,
         update: false,
       });
     });
