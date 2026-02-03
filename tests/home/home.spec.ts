@@ -6,7 +6,7 @@ test.describe("Home page specs", () => {
   test("check page title", async ({ page }) => {
     await page.goto("/");
     await expect(page).toHaveTitle(
-      "Practice Software Testing - Toolshop - v5.0"
+      "Practice Software Testing - Toolshop - v5.0",
     );
   });
 
@@ -35,7 +35,7 @@ test.describe("Home page specs", () => {
           const response = await route.fetch();
           products = await response.json();
           route.continue();
-        }
+        },
       );
     });
     await page.goto("/");
@@ -54,7 +54,7 @@ test.describe("Home page specs", () => {
     await test.step("abort /category/tree", async () => {
       await page.route(
         "https://api.practicesoftwaretesting.com/categories/tree**",
-        (route) => route.abort()
+        (route) => route.abort(),
       );
     });
 
@@ -62,7 +62,7 @@ test.describe("Home page specs", () => {
 
     // This is data that should not be on the screen
     await expect(
-      page.getByText("SortName (A - Z)Name (Z - A)")
+      page.getByText("Sort Name (A - Z)Name (Z - A)"),
     ).not.toContainText("Power Tools");
   });
 
@@ -80,19 +80,19 @@ test.describe("Home page specs", () => {
           json.data[0]["in_stock"] = false;
 
           await route.fulfill({ response, json });
-        }
+        },
       );
     });
     await page.goto("/");
     const productGrid = page.locator(".col-md-9");
     await expect(productGrid.getByRole("link").first()).toContainText(
-      "Mocked Product"
+      "Mocked Product",
     );
     await expect(productGrid.getByRole("link").first()).toContainText(
-      "Out of stock"
+      "Out of stock",
     );
     await expect(productGrid.getByRole("link").first()).toContainText(
-      "100000.01"
+      "100000.01",
     );
   });
 
@@ -124,16 +124,16 @@ test.describe("Home page specs", () => {
           // fs.writeFileSync(".json/categories.json", JSON.stringify(json));
 
           const testTools = JSON.parse(
-            fs.readFileSync(path.resolve(".json/categories.json"), "utf-8")
+            fs.readFileSync(path.resolve(".json/categories.json"), "utf-8"),
           );
 
           await route.fulfill({ json: testTools });
-        }
+        },
       );
     });
     await page.goto("/");
-    await expect(page.getByText("SortName (A - Z)Name (Z - A)")).toContainText(
-      "Playwright"
+    await expect(page.getByText("Sort Name (A - Z)Name (Z - A)")).toContainText(
+      "Playwright",
     );
   });
 
@@ -146,7 +146,7 @@ test.describe("Home page specs", () => {
       async (route) => {
         await page.waitForTimeout(4000);
         await route.continue();
-      }
+      },
     );
     await page.goto("/");
     const skeletonLocator = page.locator(".skeleton").first();
@@ -177,7 +177,7 @@ test.describe("Home page specs", () => {
           status: 429,
           body: "Too Many Requests",
         });
-      }
+      },
     );
     await page.goto("/");
     const skeletonLocator = page.locator(".skeleton").first();

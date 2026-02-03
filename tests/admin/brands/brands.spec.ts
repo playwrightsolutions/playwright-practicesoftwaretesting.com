@@ -10,11 +10,11 @@ test.describe("Admin brands specs", () => {
   }) => {
     await page.goto("/");
     expect(await page.getByTestId("nav-menu").innerText()).toContain(
-      "John Doe"
+      "John Doe",
     );
     await page.goto("/admin/brands");
     expect(await page.getByTestId("page-title").innerText()).toContain(
-      "Brands"
+      "Brands",
     );
     await expect(page.url()).toContain("/admin/brands");
   });
@@ -22,7 +22,7 @@ test.describe("Admin brands specs", () => {
   test("create a new brand", async ({ page }) => {
     await page.goto("/admin/brands/add");
     await page.getByTestId("name").fill("Random Brand");
-    await page.getByTestId("slug").fill("random-slug");
+    await page.getByTestId("slug").fill("randomslug");
     await page.getByTestId("brand-submit").click();
     await expect(page.getByText("Brand saved")).toBeVisible();
   });
@@ -54,7 +54,7 @@ test.describe("Customer brands specs", () => {
     await page.goto("/");
 
     expect(await page.getByTestId("nav-menu").innerText()).toContain(
-      "Jane Doe"
+      "Jane Doe",
     );
     await page.goto("/admin/brands");
     await expect(page.getByTestId("email")).toBeVisible();

@@ -5,7 +5,7 @@ test.describe("Basic UI Checks With Page Fixture", () => {
   const username = process.env.CUSTOMER_01_USERNAME || "";
   const password = process.env.CUSTOMER_01_PASSWORD || "";
   let productId;
-  const productApiUrl = "**/products?between=price,1,100&page=1";
+  const productApiUrl = "**/products?page=1&between=price,1,100&is_rental=false";
 
   test.beforeEach(async ({ page, request, apiURL }) => {
     // Gets Login Token via API call using apiBaseURL from fixture
