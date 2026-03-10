@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "threshold": 0.1,
+  "screenshots": {
+    "homepage.png": {
+      "name": "homepage.png",
+      "masks": [
+        {
+          "x": 71.39442231075697,
+          "y": 94.18326693227091,
+          "width": 71.39442231075697,
+          "height": 77.76892430278885,
+          "isPercentage": false,
+          "id": "mask_1771943277629_k1th05ppv",
+          "createdAt": "2026-02-24T14:27:57.629Z",
+          "reason": "Spinner Icon Animated"
+        }
+      ],
+      "updatedAt": "2026-02-24T14:28:15.549Z"
+    },
+    "thorHammer.png": {
+      "name": "thorHammer.png",
+      "masks": [
+        {
+          "x": 73.94422310756971,
+          "y": -2.7091633466135456,
+          "width": 63.745019920318725,
+          "height": 66.29482071713147,
+          "isPercentage": false,
+          "id": "mask_1771943306830_qgd1v95fr",
+          "createdAt": "2026-02-24T14:28:26.830Z",
+          "reason": "Spinner Icon Animated"
+        }
+      ],
+      "updatedAt": "2026-02-24T14:28:33.250Z"
+    }
+  }
+}
