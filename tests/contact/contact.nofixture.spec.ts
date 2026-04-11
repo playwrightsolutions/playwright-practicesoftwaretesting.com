@@ -25,7 +25,8 @@ test("Contact form without fixture", async ({ page }) => {
 
   // Submit using submit input
   await page.locator('input[type="submit"]').click();
-  
+  await page.waitForSelector('.alert.alert-success', { timeout: 10000 });
+
   // Verify success message
   await expect(page.locator(".alert.alert-success")).toContainText(
     "Thanks for your message! We will contact you shortly."
