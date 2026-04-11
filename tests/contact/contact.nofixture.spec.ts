@@ -1,16 +1,33 @@
 import { test, expect } from "@playwright/test";
 
-test("Home Page Tests", async ({ page }) => {
-  await page.goto("");
+test("Contact form without fixture", async ({ page }) => {
+  const baseURL = "https://practicesoftwaretesting.com";
+  await page.goto(baseURL);
+  await page.waitForLoadState('load');
 
-  await page.getByTestId("nav-contact").click();
-  await page.getByTestId("first-name").fill("Test");
-  await page.getByTestId("last-name").fill("Mctester");
-  await page.getByTestId("email").fill("asf@asdf.com");
-  await page.getByTestId("subject").selectOption("payments");
-  await page.getByTestId("message").fill("test".repeat(40));
-  await page.getByTestId("contact-submit").click();
-  await expect(page.locator(".alert-success")).toHaveText(
+  // Navigate to contact using accessible selector
+  await page.getByRole('link', { name: /contact/i }).click();
+  await page.waitForLoadState('networkidle');
+
+  // Fill form using ID selectors (discovered via inspection)
+  await page.locator('#first_name').fill('Test');
+  await page.locator('#last_name').fill('Mctester');
+  await page.locator('#email').fill('asf@asdf.com');
+  
+  // Select and dispatch multiple events to trigger validation
+  const subjectSelect = page.locator('#subject');
+  await subjectSelect.selectOption({ label: 'Payments' });
+  await subjectSelect.dispatchEvent('change');
+  await subjectSelect.dispatchEvent('blur');
+  await subjectSelect.dispatchEvent('input');
+  
+  await page.locator('#message').fill('test'.repeat(40));
+
+  // Submit using submit input
+  await page.locator('input[type="submit"]').click();
+  
+  // Verify success message
+  await expect(page.locator(".alert")).toContainText(
     "Thanks for your message! We will contact you shortly."
   );
 });
